@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -7,13 +7,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './card.component.css'
 })
 export class CardComponent {
-  @Input() id: string = '1';
-  @Input() title: string = 'Untitled';
-  @Input() description: string = 'Description description';
+  @Input() card: any = { id: '', title: 'Untitled', description: '' };
+  @Output() onClick = new EventEmitter<any>();
 
-  get truncatedDescription(): string {
-    return this.description.length > 100 
-      ? this.description.substring(0, 100) + '...' 
-      : this.description;
+  handleClick(): void {
+    this.onClick.emit(this.card);
   }
 }

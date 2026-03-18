@@ -48,3 +48,9 @@
   color: #e2e8f0;
   border-color: #e29531;
 }
+
+:host ::ng-deep app-list-form {
+  flex: 0 0 17.5rem;
+  width: 17.5rem;
+  align-self: flex-start;
+}

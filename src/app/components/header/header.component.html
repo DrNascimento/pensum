@@ -3,7 +3,27 @@
     <h1 class="logo">Pensum</h1>
     <nav class="nav">
       <a href="#" class="nav-link">Home</a>
-      <a href="#" class="nav-link">Boards</a>
+      <div class="boards-menu">
+        <a class="nav-link" (click)="toggleDropdown(); $event.preventDefault()" href="#">Boards</a>
+        <div class="dropdown" *ngIf="showBoardsDropdown">
+          <button class="dropdown-btn-new" (click)="showBoardForm = true; showBoardsDropdown = false">+ New Board</button>
+          <ul class="dropdown-list">
+            <li *ngFor="let board of boards" class="dropdown-item" (click)="navigateToBoard(board.id)">
+              {{ board.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
   </div>
 </header>
+
+<div class="overlay" *ngIf="showBoardForm" (click)="showBoardForm = false">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <button type="button" class="btn-close" (click)="showBoardForm = false">&times;</button>
+    <app-board-form
+      (onSave)="createBoard($event)"
+      (onCancel)="showBoardForm = false"
+    ></app-board-form>
+  </div>
+</div>

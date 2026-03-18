@@ -1,7 +1,6 @@
-<div class="card">
+<div class="card" (click)="handleClick()">
   <div class="card-header">
-    <span class="card-id">#{{ id }}</span>
-    <h3 class="card-title">{{ title }}</h3>
+    <span class="card-id">#{{ card.id }}</span>
+    <h3 class="card-title">{{ card.title }}</h3>
   </div>
-  <p class="card-description">{{ truncatedDescription }}</p>
 </div>
