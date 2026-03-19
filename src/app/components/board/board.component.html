@@ -3,9 +3,12 @@
     <h1 class="board-title">{{ boardName }}</h1>
   </div>
   <div class="board">
-    <app-list></app-list>
-    <app-list></app-list>
-    <app-list></app-list>
-    <button class="add-list-btn">+</button>
+    <app-list *ngFor="let list of lists" [listName]="list"></app-list>
+    <app-list-form
+      *ngIf="showListForm"
+      (onSave)="addList($event)"
+      (onCancel)="showListForm = false"
+    ></app-list-form>
+    <button *ngIf="!showListForm" class="add-list-btn" (click)="showListForm = true">+</button>
   </div>
 </div>

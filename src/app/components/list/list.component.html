@@ -4,9 +4,17 @@
   </div>
   <div class="list-divider"></div>
   <div class="list-cards">
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
+    <app-card
+      *ngFor="let card of cards"
+      [card]="card"
+      (onClick)="openEditForm($event)"
+    ></app-card>
   </div>
-  <button class="add-card-btn">+</button>
+  <app-card-form
+    *ngIf="showCardForm"
+    [card]="editingCard"
+    (onSave)="saveCard($event)"
+    (onCancel)="closeForm()"
+  ></app-card-form>
+  <button *ngIf="!showCardForm" class="add-card-btn" (click)="openCreateForm()">+</button>
 </div>

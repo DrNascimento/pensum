@@ -1,7 +1,7 @@
 .list {
   flex: 0 0 17.5rem;
   width: 17.5rem;
-  height: 100%;
+  height: auto;
   background-color: #252930;
   border-radius: 0.5rem;
   padding: 1rem;
@@ -35,7 +35,6 @@
   flex-direction: column;
   gap: 0.75rem;
   overflow-y: auto;
-  flex: 1;
   margin-bottom: 0.75rem;
 }
 

@@ -1,0 +1,27 @@
+<form class="form" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="form-field">
+    <label class="form-label" for="list-name">Name</label>
+    <input
+      id="list-name"
+      class="form-input"
+      type="text"
+      formControlName="name"
+      [maxLength]="maxName"
+      placeholder="List name"
+    />
+    <div class="form-footer">
+      <span class="form-error" *ngIf="form.get('name')?.touched && form.get('name')?.hasError('required')">
+        Name is required.
+      </span>
+      <span class="char-counter">
+        {{ form.get('name')?.value?.length || 0 }} / {{ maxName }}
+      </span>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      {{ isEditMode ? 'Update' : 'Create' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="onCancel.emit()">Cancel</button>
+  </div>
+</form>

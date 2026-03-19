@@ -1,0 +1,81 @@
+<div class="overlay" (click)="onCancel.emit()">
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()" (click)="$event.stopPropagation()">
+    <button type="button" class="btn-close" (click)="onCancel.emit()">&times;</button>
+    <div class="form-body">
+      <div class="form-left">
+        <h2 class="form-title">
+          <span *ngIf="card?.id" class="card-number">#{{ card.id }}</span>
+          {{ isEditMode ? 'Edit Card' : 'New Card' }}
+        </h2>
+        <div class="form-field">
+          <label class="form-label" for="card-title">Title</label>  
+          <input
+            id="card-title"
+            class="form-input"
+            type="text"
+            formControlName="title"
+            [maxLength]="maxTitle"
+            placeholder="Card title"
+          />
+          <div class="form-footer">
+            <span class="form-error" *ngIf="form.get('title')?.touched && form.get('title')?.hasError('required')">
+              Title is required.
+            </span>
+            <span class="char-counter">
+              {{ form.get('title')?.value?.length || 0 }} / {{ maxTitle }}
+            </span>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="card-description">Description</label>
+          <textarea
+            id="card-description"
+            class="form-input form-textarea"
+            formControlName="description"
+            [maxLength]="maxDescription"
+            placeholder="Card description (supports Markdown)"
+          ></textarea>
+          <div class="form-footer">
+            <span class="form-error" *ngIf="form.get('description')?.touched && form.get('description')?.hasError('maxlength')">
+              Description must not exceed {{ maxDescription }} characters.
+            </span>
+            <span class="char-counter">
+              {{ form.get('description')?.value?.length || 0 }} / {{ maxDescription }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="form-right">
+        <div class="sidebar-fields">
+          <div class="form-field">
+            <label class="form-label" for="card-author">Author</label>
+            <input
+              id="card-author"
+              class="form-input sidebar-input"
+              type="text"
+              [value]="card?.author || ''"
+              readonly
+            />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="card-created">Created at</label>
+            <input
+              id="card-created"
+              class="form-input sidebar-input"
+              type="date"
+              [value]="card?.createdAt"
+              readonly
+            />
+          </div>
+
+        </div>
+        <div class="sidebar-actions">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+            {{ isEditMode ? 'Update' : 'Create' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
